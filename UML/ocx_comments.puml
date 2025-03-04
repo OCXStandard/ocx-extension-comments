@@ -1,0 +1,134 @@
+@startuml
+
+class Project {
+    id
+    oid
+    designId
+    vesselId
+    contractBuilderBuildNo
+    contractBuilderBuildName
+    imoNumber
+    projectId
+    projectName
+}
+
+
+class MarkupComment {
+    id
+    oid
+    commentId
+    status
+    commentType
+}
+
+
+class IssueDate {
+    DateTime
+}
+class ClosedDate {
+    DateTime
+}
+class Title {
+    string
+}
+class CommentDescription {
+    string
+}
+class Reference {
+    string
+}
+class Note {
+    string
+}
+
+class Attachment {
+    oid
+    embedding
+    document
+}
+
+
+class Reply {
+    id
+    oid
+    replyId
+    issuedBy
+}
+
+class ReplyDescription {
+    string
+}
+
+class VisualizationInfo {
+    oid
+}
+
+class OrthogonalCamera {
+    aspectRatio
+}
+class CameraViewPoint {
+    coordinates
+    unit
+}
+class CameraDirection {
+    direction
+}
+class CameraUpVector {
+    direction
+}
+class ViewToWorldScale {
+    numericvalue
+    unit
+}
+
+class PerspectiveCamera {
+    fieldOfView
+    aspectRatio
+}
+
+class ClippingPlane {
+    oid
+}
+
+class Location {
+    coordinates
+    unit
+}
+class Direction {
+    direction
+}
+
+class SnapShot {
+    oid
+    embedding
+    document
+}
+
+Project --> "1..*" MarkupComment
+MarkupComment --> "1" IssueDate
+MarkupComment --> "0..1" ClosedDate
+MarkupComment --> "1" Title
+MarkupComment --> "1" CommentDescription
+MarkupComment --> "0..1" Reference
+MarkupComment --> "0..1" Note
+MarkupComment --> "0..*" Attachment
+MarkupComment --> "0..*" Reply
+Reply --> "1" ReplyDescription
+Reply --> "1" IssueDate
+Reply --> "0..*" Attachment
+MarkupComment --> "1" VisualizationInfo
+VisualizationInfo --> "0..1" OrthogonalCamera
+VisualizationInfo --> "0..1" PerspectiveCamera
+VisualizationInfo --> "0..*" ClippingPlane
+OrthogonalCamera --> "1" CameraViewPoint
+OrthogonalCamera --> "1" CameraDirection
+OrthogonalCamera --> "1" CameraUpVector
+OrthogonalCamera --> "1" ViewToWorldScale
+PerspectiveCamera --> "1" CameraViewPoint
+PerspectiveCamera --> "1" CameraDirection
+PerspectiveCamera --> "1" CameraUpVector
+ClippingPlane --> "1" Location
+ClippingPlane --> "1" Direction
+VisualizationInfo --> "1" SnapShot
+
+@enduml
