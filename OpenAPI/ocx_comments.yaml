@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Project Comments API
+  description: API to fetch project comments.
+  version: 1.0.0
+
+paths:
+  /GetProjectComments:
+    get:
+      summary: Retrieve project comments
+      description: Returns a list of comments for a project.
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: A unique project ID.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projectId:
+                    type: string
+                    description: A unique project ID.
+                  projectName:
+                    type: string
+                    description: The name of the project.
+                  comments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        oid:
+                          type: string
+                          description: Comment unique id
+                        commentId:
+                          type: string
+                          description: A server assigned comment ID.
+                        title:
+                          type: string
+                          description: The comment title.
+                        text:
+                          type: string
+                          description: The comment text.
+                        author:
+                          type: string
+                          description: Name of the author.
+                        IssueDate:
+                          type: string
+                          format: date-time
+                          description: The date and time the comment was created.
+                        status:
+                          type: string
+                          enum: ["Open", "Closed","Closed but disregarded", "NA - Not appliccable"]
+                          description: The comment status.
+                        type:
+                          type: string
+                          enum: ["Action Required", "Important Note"]
+                          description: The comment type.
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Project not found
