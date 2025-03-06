@@ -282,7 +282,7 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="aspectRatio" use="required">
+		<xs:attribute name="aspectRatio" type="xs:double" use="required">
 			<xs:annotation>
 				<xs:documentation>  Proportional relationship between the width and the height of the view (w/h).</xs:documentation>
 			</xs:annotation>
@@ -302,7 +302,7 @@
 				<xs:documentation>Vertical field of view, in degrees.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="aspectRatio" use="required">
+		<xs:attribute name="aspectRatio" type="xs:double" use="required">
 			<xs:annotation>
 				<xs:documentation> Proportional relationship between the width and the height of the view (w/h).</xs:documentation>
 			</xs:annotation>

@@ -41,6 +41,12 @@ class Note {
     string
 }
 
+class Component {
+    GUIDRef
+    partName
+}
+
+
 class Attachment {
     oid
     embedding
@@ -71,10 +77,10 @@ class CameraViewPoint {
     unit
 }
 class CameraDirection {
-    direction
+    vector
 }
 class CameraUpVector {
-    direction
+    vector
 }
 class ViewToWorldScale {
     numericvalue
@@ -95,7 +101,7 @@ class Location {
     unit
 }
 class Direction {
-    direction
+    vector
 }
 
 class SnapShot {
@@ -113,6 +119,7 @@ MarkupComment --> "0..1" Reference
 MarkupComment --> "0..1" Note
 MarkupComment --> "0..*" Attachment
 MarkupComment --> "0..*" Reply
+MarkupComment --> "0..*" Component
 Reply --> "1" ReplyDescription
 Reply --> "1" IssueDate
 Reply --> "0..*" Attachment
