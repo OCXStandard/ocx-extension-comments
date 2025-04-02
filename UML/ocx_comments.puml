@@ -1,113 +1,112 @@
 @startuml
 
 class Project {
-    id
-    oid
-    designId
-    vesselId
-    contractBuilderBuildNo
-    contractBuilderBuildName
-    imoNumber
-    projectId
-    projectName
+    +id
+    +oid
+    +designId
+    +vesselId
+    +contractBuilderBuildNo
+    +contractBuilderBuildName
+    +imoNumber
+    +projectId
+    +projectName
 }
 
 
 class MarkupComment {
-    id
-    oid
-    commentId
-    status
-    commentType
+    +id
+    +oid
+    +commentId
+    +status
+    +commentType
 }
 
 
 class IssueDate {
-    DateTime
+    +DateTime
 }
 class ClosedDate {
-    DateTime
+    +DateTime
 }
 class Title {
-    string
+    +string
 }
 class CommentDescription {
-    string
+    +string
 }
 class Reference {
-    string
+    +string
 }
 class Note {
-    string
+    +string
 }
 
-class Component {
-    GUIDRef
-    partName
+class Part {
+    +GUIDRef
+    +partName
 }
 
 
 class Attachment {
-    oid
-    embedding
-    document
+    +oid
+    +embedding
+    +document
 }
 
 
 class Reply {
-    id
-    oid
-    replyId
-    issuedBy
+    +id
+    +oid
+    +replyId
+    +issuedBy
 }
 
 class ReplyDescription {
-    string
+    +string
 }
 
 class VisualizationInfo {
-    oid
+    +oid
 }
 
 class OrthogonalCamera {
-    aspectRatio
+    +aspectRatio
 }
 class CameraViewPoint {
-    coordinates
-    unit
+    +coordinates
+    +unit
 }
 class CameraDirection {
-    vector
+    +vector
 }
 class CameraUpVector {
-    vector
+    +vector
 }
 class ViewToWorldScale {
-    numericvalue
-    unit
+    +numericvalue
+    +unit
 }
 
 class PerspectiveCamera {
-    fieldOfView
-    aspectRatio
+    +fieldOfView
+    +aspectRatio
 }
 
-class ClippingPlane {
-    oid
+class NearPlane {
+    + numericValue
+    + unit
 }
 
-class Location {
-    coordinates
-    unit
+class FarPlane {
+    + numericValue
+    + unit
 }
-class Direction {
-    vector
-}
+
 
 class SnapShot {
-    oid
-    embedding
-    document
+    +oid
+    +embedding
+    +document
 }
 
 Project --> "1..*" MarkupComment
@@ -119,14 +118,15 @@ MarkupComment --> "0..1" Reference
 MarkupComment --> "0..1" Note
 MarkupComment --> "0..*" Attachment
 MarkupComment --> "0..*" Reply
-MarkupComment --> "0..*" Component
+MarkupComment --> "0..*" Part
 Reply --> "1" ReplyDescription
 Reply --> "1" IssueDate
 Reply --> "0..*" Attachment
 MarkupComment --> "1" VisualizationInfo
 VisualizationInfo --> "0..1" OrthogonalCamera
 VisualizationInfo --> "0..1" PerspectiveCamera
-VisualizationInfo --> "0..*" ClippingPlane
+VisualizationInfo --> "1" NearPlane
+VisualizationInfo --> "1" FarPlane
 OrthogonalCamera --> "1" CameraViewPoint
 OrthogonalCamera --> "1" CameraDirection
 OrthogonalCamera --> "1" CameraUpVector
@@ -134,8 +134,6 @@ OrthogonalCamera --> "1" ViewToWorldScale
 PerspectiveCamera --> "1" CameraViewPoint
 PerspectiveCamera --> "1" CameraDirection
 PerspectiveCamera --> "1" CameraUpVector
-ClippingPlane --> "1" Location
-ClippingPlane --> "1" Direction
 VisualizationInfo --> "1" SnapShot
 
 @enduml

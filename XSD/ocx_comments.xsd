@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2024 (x64) (http://www.altova.com) by Astrup, Ole Christian (DNV AS) -->
-<xs:schema xmlns:cmnt="urn:3docx.org:schema:xsd:ocx_comments-0.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ocx="https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd" targetNamespace="urn:3docx.org:schema:xsd:ocx_comments-0.1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" cmnt:schemaLocation="urn:3docx:org:schema:xsd:ocx_comments-0.1.0 https://3docx.org/fileadmin//ocx_comments//V010//ocx_comments.xsd">
+<xs:schema xmlns:cmnt="urn:3docx.org:schema:xsd:ocx_comments-0.1.0b1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ocx="https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd" targetNamespace="urn:3docx.org:schema:xsd:ocx_comments-0.1.0b1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" cmnt:schemaLocation="urn:3docx:org:schema:xsd:ocx_comments-0.1.0 https://3docx.org/fileadmin//ocx_comments//V010//ocx_comments.xsd">
 	<xs:import namespace="https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd" schemaLocation="https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd"/>
 	<!-- ===== Global ATTRIBUTES  ======-->
 	<xs:attribute name="projectId">
@@ -52,9 +52,44 @@
 		<xs:annotation>
 			<xs:documentation>Type definition of Project.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ocx:IdBase_T"/>
-		</xs:complexContent>
+		<xs:attribute name="schemaVersion" type="xs:string" use="required" fixed="0.1.0b1">
+			<xs:annotation>
+				<xs:documentation>Current XML schema version (Format - x.y.z) x : Incremented for backward incompatible changes ( Ex - Adding a required attribute, etc.) y : Major backward compatible changes [ Ex - Adding a new node ,fixing major CRs,etc...] z : Minor backward compatible changes (Ex - adding an optional attribute, etc).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:ID" use="required">
+			<xs:annotation>
+				<xs:documentation>An identifier for an element unique within the scope of the XML file. Each id must be unique within a document. The attribute uses the standard XML 1.0 ID type as defined in the XML Schema specification. This attribute is required in many OCX XML elements and an application should generate them automatically.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="cmnt:oid" use="required"/>
+		<xs:attribute name="designId" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A unique vessel design ID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="vesselId" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A unique vessel ID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="contractBuilderBuildNo" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The yard build number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="contractBuilderBuildName" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The yard name</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="imoNumber" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The vessel assigned IMO number</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="cmnt:projectId"/>
+		<xs:attribute ref="cmnt:projectName"/>
 	</xs:complexType>
 	<xs:element name="Project">
 		<xs:annotation>
@@ -66,34 +101,6 @@
 					<xs:sequence>
 						<xs:element ref="cmnt:Comments"/>
 					</xs:sequence>
-					<xs:attribute ref="cmnt:oid" use="required"/>
-					<xs:attribute name="designId" type="xs:string">
-						<xs:annotation>
-							<xs:documentation>A unique vessel design ID</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute name="vesselId" type="xs:string">
-						<xs:annotation>
-							<xs:documentation>A unique vessel ID</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute name="contractBuilderBuildNo" type="xs:string">
-						<xs:annotation>
-							<xs:documentation>The yard build number</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute name="contractBuilderBuildName" type="xs:string">
-						<xs:annotation>
-							<xs:documentation>The yard name</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute name="imoNumber" type="xs:string">
-						<xs:annotation>
-							<xs:documentation>The vessel assigned IMO number</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute ref="cmnt:projectId"/>
-					<xs:attribute ref="cmnt:projectName"/>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -102,24 +109,26 @@
 		<xs:annotation>
 			<xs:documentation>Type definition of a Comment.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ocx:IdBase_T">
-				<xs:sequence>
-					<xs:element ref="cmnt:IssueDate"/>
-					<xs:element ref="cmnt:ClosedDate" minOccurs="0"/>
-					<xs:element ref="cmnt:Title"/>
-					<xs:element ref="cmnt:CommentDescription"/>
-					<xs:element ref="cmnt:Attachment" minOccurs="0"/>
-					<xs:element ref="cmnt:Reference" minOccurs="0"/>
-					<xs:element ref="cmnt:Note" minOccurs="0"/>
-					<xs:element ref="cmnt:Replies" minOccurs="0"/>
-				</xs:sequence>
-				<xs:attribute ref="cmnt:oid" use="required"/>
-				<xs:attribute ref="cmnt:commentId" use="required"/>
-				<xs:attribute ref="cmnt:status" use="required"/>
-				<xs:attribute ref="cmnt:commentType" use="required"/>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element ref="cmnt:IssueDate"/>
+			<xs:element ref="cmnt:ClosedDate" minOccurs="0"/>
+			<xs:element ref="cmnt:Title"/>
+			<xs:element ref="cmnt:CommentDescription"/>
+			<xs:element ref="cmnt:ReferencedParts" minOccurs="0"/>
+			<xs:element ref="cmnt:Attachment" minOccurs="0"/>
+			<xs:element ref="cmnt:Reference" minOccurs="0"/>
+			<xs:element ref="cmnt:Note" minOccurs="0"/>
+			<xs:element ref="cmnt:Replies" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required">
+			<xs:annotation>
+				<xs:documentation>An identifier for an element unique within the scope of the XML file. Each id must be unique within a document. The attribute uses the standard XML 1.0 ID type as defined in the XML Schema specification. This attribute is required in many OCX XML elements and an application should generate them automatically.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="cmnt:oid" use="required"/>
+		<xs:attribute ref="cmnt:commentId" use="required"/>
+		<xs:attribute ref="cmnt:status" use="required"/>
+		<xs:attribute ref="cmnt:commentType" use="required"/>
 	</xs:complexType>
 	<xs:element name="Comment">
 		<xs:annotation>
@@ -181,26 +190,27 @@
 		<xs:annotation>
 			<xs:documentation>The type definition of a Reply.</xs:documentation>
 		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="ocx:IdBase_T">
-				<xs:sequence>
-					<xs:element ref="cmnt:ReplyDescription"/>
-					<xs:element ref="cmnt:IssueDate"/>
-					<xs:element ref="cmnt:Attachment" minOccurs="0" maxOccurs="unbounded"/>
-				</xs:sequence>
-				<xs:attribute ref="cmnt:oid" use="required"/>
-				<xs:attribute name="replyId" type="xs:string" use="required">
-					<xs:annotation>
-						<xs:documentation>A unuqui reply id</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-				<xs:attribute name="issuedBy" type="xs:string" use="required">
-					<xs:annotation>
-						<xs:documentation>The name of the issuer.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element ref="cmnt:ReplyDescription"/>
+			<xs:element ref="cmnt:IssueDate"/>
+			<xs:element ref="cmnt:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute ref="cmnt:oid" use="required"/>
+		<xs:attribute name="replyId" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>A unuqui reply id</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="issuedBy" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The name of the issuer.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:ID" use="required">
+			<xs:annotation>
+				<xs:documentation>An identifier for an element unique within the scope of the XML file. Each id must be unique within a document. The attribute uses the standard XML 1.0 ID type as defined in the XML Schema specification. This attribute is required in many OCX XML elements and an application should generate them automatically.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="ReplyDescription" type="xs:string">
 		<xs:annotation>
@@ -223,7 +233,7 @@
 	<xs:element name="Attachment" type="cmnt:Attachment_T"/>
 	<xs:complexType name="Attachment_T">
 		<xs:sequence>
-			<xs:element name="Document"/>
+			<xs:element ref="cmnt:Document"/>
 		</xs:sequence>
 		<xs:attribute ref="cmnt:oid" use="required"/>
 		<xs:attribute name="embedding" use="required">
@@ -319,15 +329,6 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="ClippingPlane">
-		<xs:annotation>
-			<xs:documentation>The clipping plane definition.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="Location" type="ocx:Point3D_T"/>
-			<xs:element name="Direction" type="ocx:Vector3D_T"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:element name="VisualizationInfo">
 		<xs:annotation>
 			<xs:documentation>VisualizationInfo documentation</xs:documentation>
@@ -351,15 +352,47 @@
 				<xs:element name="OrthogonalCamera" type="cmnt:OrthogonalCamera"/>
 				<xs:element name="PerspectiveCamera" type="cmnt:PerspectiveCamera"/>
 			</xs:choice>
-			<xs:element name="ClippingPlanes" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="ClippingPlane" type="cmnt:ClippingPlane" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
+			<xs:element name="SnapShot" type="cmnt:Attachment_T">
+				<xs:annotation>
+					<xs:documentation>A snapshot of the cmaera view.</xs:documentation>
+				</xs:annotation>
 			</xs:element>
-			<xs:element name="SnapShot" type="cmnt:Attachment_T"/>
+			<xs:element name="NearPlane" type="ocx:Quantity_T">
+				<xs:annotation>
+					<xs:documentation>The distance from the camera position to the near plane</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FarPlane" type="ocx:Quantity_T">
+				<xs:annotation>
+					<xs:documentation>The distance from the camera position to the far plane</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute ref="cmnt:oid" use="required"/>
 	</xs:complexType>
+	<xs:element name="Document">
+		<xs:annotation>
+			<xs:documentation>A document attachment.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReferencedParts">
+		<xs:annotation>
+			<xs:documentation>A list of parts that are referenced in a comment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cmnt:Part" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Part">
+		<xs:complexType>
+			<xs:attribute ref="ocx:GUIDRef" use="required"/>
+			<xs:attribute name="partName" use="required">
+				<xs:annotation>
+					<xs:documentation>The name of the referenced part.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

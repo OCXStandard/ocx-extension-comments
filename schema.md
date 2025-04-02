@@ -43,6 +43,7 @@
     - `cmnt:Reference`
     - `cmnt:Note`
     - `cmnt:Replies`
+    - `ReferencedParts`
 
 #### **Attributes**
 | Name          | Type      | Required | Description |
@@ -104,7 +105,7 @@
 ---
 
 ## **External Dependencies**
-- `ocx:IdBase_T`, `ocx:Point3D_T`, `ocx:Vector3D_T`, `ocx:Quantity_T` are imported from `https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd`.
+- `ocx:Point3D_T`, `ocx:Vector3D_T`, `ocx:Quantity_T` are imported from `https://3docx.org/fileadmin//ocx_schema//V300//OCX_Schema.xsd`.
 
 ---
 
